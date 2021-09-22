@@ -1,11 +1,7 @@
 import React from "react";
 
-type Props = {
-	todo: ITodo
-	updateTodo: (id: number) => void
-}
+// single to do template
 
-// single to do  template
 const Todo: React.FC<Props> = ({todo, updateTodo}) => {
 	const checkTodo: string = todo.status ? `line-through` : ``
 	return (
@@ -13,9 +9,9 @@ const Todo: React.FC<Props> = ({todo, updateTodo}) => {
 			<div className='Card--text'>
 				<h1 className={checkTodo}>{todo.title}</h1>
 				<span className={checkTodo}>{todo.description}</span>
+				<button onClick={() => updateTodo(todo.id)} className={todo.status ? `hide-button` : `Card--button`}>Complete
+				</button>
 			</div>
-			<button onClick={() => updateTodo(todo.id)} className={todo.status ? `hide-button` : `Card--button`}>Complete
-			</button>
 		</div>
 	)
 }

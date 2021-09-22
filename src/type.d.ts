@@ -7,6 +7,11 @@ interface ITodo {
 
 type ContextType = {
 	todos: ITodo[]
-	saveTodo: (todo: Itodo) => void
+	saveTodo: (todo: ITodo) => void
+	updateTodo: (id: number) => void
+}
+
+type Props = {
+	todo: ITodo
 	updateTodo: (id: number) => void
 }
