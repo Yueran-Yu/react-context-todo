@@ -1,9 +1,10 @@
-import React, {createContext, useState} from "react";
+import React, {createContext, ReactNode, useState} from "react";
 
-// if you don't set the type for the createContext, the 'value' will complain once you pass the three params to it
+
+// this provider need to provide the todos list data, save to do function and update to do function
 export const TodoContext = createContext<ContextType | null>(null)
 
-const TodoProvider: React.FC = ({children}) => {
+const TodoProvider: React.FC<ReactNode> = ({children}) => {
 	const [todos, setTodos] = useState<ITodo[]>([{
 		id: 1,
 		title: 'post 1',
@@ -17,6 +18,7 @@ const TodoProvider: React.FC = ({children}) => {
 			status: true
 		}])
 
+	// use setTodos function to save the to do to
 	const saveTodo = (todo: ITodo) => {
 		const newTodo = {
 			id: Math.random(),
@@ -26,11 +28,13 @@ const TodoProvider: React.FC = ({children}) => {
 		}
 		setTodos([...todos, newTodo])
 	}
+
 	const updateTodo = (id: number) => {
+		// eslint-disable-next-line array-callback-return
 		todos.filter(todo => {
 			if (todo.id === id) {
-				todo.status = true
-				setTodos([...todos])
+				// todo.status = true
+				setTodos([...todos, {...todo, status: true}])
 			}
 		})
 	}
@@ -42,4 +46,4 @@ const TodoProvider: React.FC = ({children}) => {
 	)
 }
 
-export default  TodoProvider;
+export default TodoProvider;
