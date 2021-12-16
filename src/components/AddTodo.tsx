@@ -4,7 +4,7 @@ import {TodoContext} from "../context/TodoProvider";
 const AddTodo: React.FC = () => {
 	// when only need to get part of the context properties, you can use assertion to define the type
 	const {saveTodo} = useContext(TodoContext) as ContextType
-	const [formData, setFormData] = useState<ITodo | any>({})
+	const [formData, setFormData] = useState<ITodo | any>()
 
 	const handleForm = (e: FormEvent<HTMLInputElement>): void => {
 		setFormData({
@@ -14,7 +14,13 @@ const AddTodo: React.FC = () => {
 	}
 	const handleSaveTodo = (e: FormEvent, formData: ITodo) => {
 		e.preventDefault()
-		saveTodo(formData)
+		if (formData === undefined) {
+			alert('Please enter content first.')
+		} else {
+			saveTodo(formData)
+			Array.from(document.querySelectorAll('input')).forEach(
+				input => (input.value = ''))
+		}
 	}
 
 	return (

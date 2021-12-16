@@ -1,6 +1,5 @@
 import React, {createContext, ReactNode, useState} from "react";
 
-
 // this provider need to provide the todos list data, save to do function and update to do function
 export const TodoContext = createContext<ContextType | null>(null)
 
@@ -31,10 +30,10 @@ const TodoProvider: React.FC<ReactNode> = ({children}) => {
 
 	const updateTodo = (id: number) => {
 		// eslint-disable-next-line array-callback-return
-		todos.filter(todo => {
+		todos.find(todo => {
 			if (todo.id === id) {
-				// todo.status = true
-				setTodos([...todos, {...todo, status: true}])
+				todo.status = true
+				setTodos([...todos])
 			}
 		})
 	}

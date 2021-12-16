@@ -6,6 +6,7 @@ export const Todo: React.FC<Props> = ({todo, updateTodo}) => {
 	return (
 		<div className='Card'>
 			<div className='Card--text'>
+				<h1>ID: {todo.id}</h1>
 				<h1 className={checkTodo}>{todo.title}</h1>
 				<span className={checkTodo}>{todo.description}</span>
 			</div>
